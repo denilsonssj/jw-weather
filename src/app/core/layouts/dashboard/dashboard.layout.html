@@ -1,0 +1,18 @@
+<div id="wrapper">
+  <app-navbar></app-navbar>
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="drawer" mode="side" opened>
+    <mat-nav-list class="list">
+      <mat-list-item class="list-item" *ngFor="let link of links">
+         <a matLine [routerLink]="[link.path]">{{ link.label }}</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="drawer-content">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </mat-drawer-content>
+</mat-drawer-container>
+</div>

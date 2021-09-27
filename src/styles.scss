@@ -13,18 +13,23 @@ $custom-theme: mat-light-theme(
 
 @include angular-material-theme($custom-theme);
 
-
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html,
 body { 
   height: 100%; 
 }
+
 body { 
   margin: 0;
-  font-family: "Roboto", "Helvetica Neue", sans-serif; 
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+app-root {
+  height: 100%;
+  width: 100%;
 }

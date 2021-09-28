@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 interface IPathPros {
   path: string;
   label: string;
+  icon: string;
 }
 
 @Component({
@@ -14,8 +15,8 @@ interface IPathPros {
 export class DashboardLayout implements OnInit {
 
   links: IPathPros[] = [
-    { path: '/', label: 'Home' },
-    { path: '/bookmarks', label: 'Bookmarks' }
+    { path: '/', label: 'Home', icon: 'home' },
+    { path: '/bookmarks', label: 'Bookmarks', icon: 'star' }
   ];
 
   constructor() { }

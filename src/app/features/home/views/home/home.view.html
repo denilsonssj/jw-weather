@@ -1,1 +1,49 @@
-<p>home works!</p>
+<div id="home-view">
+  <section class="search-form-section">
+    <fieldset class="search-fieldset">
+      <mat-form-field appearance="outline" [floatLabel]="searchLabelControl.value">
+        <mat-label>Search your city</mat-label>
+        <input matInput placeholder="Type a value" [formControl]="searchControl" required>
+        <mat-error *ngIf="searchControl.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <button class="search-button"
+              mat-flat-button 
+              color="primary"
+              [disabled]="!searchControl.valid || (loading$ | async)"
+              (click)="doSearch()">Search
+      </button>
+    </fieldset>
+    <fieldset class="search-fieldset">
+      <mat-form-field appearance="outline" [floatLabel]="searchLabelControl.value">
+        <mat-label>Search with autocomplete</mat-label>
+        <input matInput placeholder="Type a value" [formControl]="searchWithAutoCompleteControl" required>
+        <mat-error *ngIf="searchWithAutoCompleteControl.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <button class="search-button"
+              mat-flat-button 
+              color="primary"
+              [disabled]="!searchWithAutoCompleteControl.valid || (loading$ | async)"
+      >Search
+      </button>
+    </fieldset>
+  </section>
+  <section class="search-info">
+    <div *ngIf="!(loading$ | async) && !(error$ | async)">
+      <current-weather *ngIf="!!cityWeather"
+                       [cityWeather]="cityWeather"
+                       (onToggleBookmark)="onToggleBookmark()">
+      </current-weather>
+    </div>
+    <div *ngIf="!(loading$ | async) && (error$ | async)">
+      <a mat-flat-button [routerLink]="['/']">Try again</a>
+    </div>
+  </section>
+  <mat-progress-spinner
+        *ngIf="loading$ | async"
+        class="spinner"
+        [color]="color"
+        [mode]="mode">
+  </mat-progress-spinner>
+</div>
+
+

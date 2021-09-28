@@ -1,0 +1,16 @@
+<div class="weather-details">
+  <div class="weather-details-item">
+    <div class="weather-icon">
+      <img [src]="weatherIcon" [alt]="weather.description" width="80px" height="80px">
+    </div>
+    <span>{{ weather.description }}</span>
+  </div>
+  <div class="weather-details-item weather-temp">
+    <h3 class="weather-temp-title">{{ weather.temp }} K</h3>
+    <span><span class="prop-description">Feelslike:</span> {{ weather.feelsLike }}K</span>
+  </div>
+  <div class="weather-details-item weather-misc">
+    <div><span class="prop-description">Humidity:</span> {{ weather.humidity }}%</div>
+    <div><span class="prop-description">Wind speed:</span> {{ weather.wind.speed }} m/s</div>
+  </div>
+</div>

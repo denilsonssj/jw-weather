@@ -1,0 +1,37 @@
+#home-view {
+  height: 100%;
+  width: 100%;
+
+  .search-form-section {
+    display: flex;
+    flex-direction: row;
+    fieldset.search-fieldset {
+      display: inherit;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      border: none;
+  
+      .search-button {
+        height: 50px;
+        margin: 5px 0 0 10px;
+        font-weight: 500;
+      }
+    }
+
+    fieldset.search-fieldset + fieldset.search-fieldset {
+      margin-left: 40px;
+    }
+  }
+
+  .search-info-section {
+
+  }
+  
+  mat-progress-spinner.spinner {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 200%);
+  }
+
+}

@@ -1,0 +1,27 @@
+.weather-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 450px;
+
+  .weather-details-item {
+    display: flex;
+    flex-direction: column;
+
+    .prop-description {
+      font-weight: 500;
+    }
+  }
+
+  .weather-temp {
+    .weather-temp-title {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  .weather-misc {
+    align-self: auto;
+  }
+}

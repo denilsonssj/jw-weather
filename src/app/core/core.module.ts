@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 
 import { MainLayout } from './layouts/main/main.layout';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,9 +21,11 @@ import { DashboardLayout } from './layouts/dashboard/dashboard.layout';
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
 
     AppMaterialModule,
     SharedModule,
+    FormsModule,
   ]
 })
 export class CoreModule { }

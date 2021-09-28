@@ -1,0 +1,12 @@
+<mat-card class="mat-card">
+  <mat-card-title class="mat-card-title">{{ cityName }}</mat-card-title>
+<mat-card-content>
+  <detailed-weather *ngIf="cityWeather"
+      [weather]="cityWeather.weather">
+  </detailed-weather>
+</mat-card-content>
+  <mat-card-actions>
+    <a mat-flat-button [routerLink]="['/']">Add to bookmarks</a>
+    <a mat-flat-button [routerLink]="['/']">View details</a>
+  </mat-card-actions>
+</mat-card>

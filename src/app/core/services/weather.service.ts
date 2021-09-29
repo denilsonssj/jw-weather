@@ -12,6 +12,7 @@ import { responseToCityWheather } from '../utils/response.util';
 })
 export class WeatherService {
 
+  apiKey: string = environment.openWeatherApiKey as string || '';
   constructor(private http: HttpClient) { }
 
   getCityWeatherByQuery(query: string): Observable<ICityWeather> {
@@ -22,7 +23,7 @@ export class WeatherService {
   }
 
   private doGet<T>(url: string, params: HttpParams): Observable<T> {
-    params = params.append('appid', environment.apiKey);
+    params = params.append('appid', this.apiKey);
     params = params.append('lang', 'pt_br');
     return this.http.get<T>(`${environment.apiUrl}/${ url }`, { params });
   }

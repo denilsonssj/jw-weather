@@ -1,0 +1,16 @@
+#bookmarks-view {
+  .mat-list {
+    .mat-list-item {
+      .bookmark-details {
+        background-color: transparent;
+      }
+      .remove-bookmark-button {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .link {
+    background-color: transparent;
+  }
+}

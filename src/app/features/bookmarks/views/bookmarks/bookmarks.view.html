@@ -1,1 +1,17 @@
-booksmarks-works
+<div id="bookmarks-view">
+  <h3>Bookmarks</h3>
+  <div *ngIf="!bookmarks.length">
+    No bookmark selected.
+  </div>
+  <mat-list class="mat-list">
+    <mat-list-item class="mat-list-item" *ngFor="let bookmark of bookmarks">
+      <a class="bookmark-details" mat-flat-button [routerLink]="['/details']">
+        {{ bookmark.name }}
+      </a>
+      <button class="remove-bookmark-button" mat-flat-button (click)="removeBookmark(bookmark.id)">
+        <mat-icon aria-hidden="false" aria-label="Remove bookmark">delete_outline</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <a class="link" mat-flat-button [routerLink]="['/']">Add new city in bookmarks.</a>
+</div>

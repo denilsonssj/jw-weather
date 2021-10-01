@@ -18,7 +18,10 @@ export class CurrentWeatherComponent {
   @Input()
   cityWeather!: ICityWeather;
 
-  @Output()
+  @Input()
+  isFavorite!: boolean;
+
+  @Output('onToggleBookmark')
   toggleBookmark = new EventEmitter();
 
   get cityName(): string {

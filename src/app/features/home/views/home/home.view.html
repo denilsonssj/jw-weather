@@ -28,12 +28,12 @@
     </fieldset>
   </section>
   <section class="search-info">
-    <div *ngIf="!(loading$ | async) && !(error$ | async)">
-      <current-weather *ngIf="!!cityWeather"
-                       [cityWeather]="cityWeather"
-                       (onToggleBookmark)="onToggleBookmark()">
-      </current-weather>
-    </div>
+    <ng-container *ngIf="!(loading$ | async) && !(error$ | async) && !!(cityWeather$ | async)">
+        <current-weather [cityWeather]="cityWeather"
+                        (onToggleBookmark)="onToggleBookmark()"
+                        [isFavorite]="!!(isCurrentFavorite$ | async)">
+        </current-weather>
+    </ng-container>
     <div *ngIf="!(loading$ | async) && (error$ | async)">
       <a mat-flat-button [routerLink]="['/']">Try again</a>
     </div>
@@ -45,5 +45,3 @@
         [mode]="mode">
   </mat-progress-spinner>
 </div>
-
-

@@ -1,19 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, combineLatest, pipe } from 'rxjs';
+import { combineAll, isEmpty, map, takeUntil } from 'rxjs/operators';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 import { ICityWeather } from 'src/app/core/models/CityWeather.model';
-import { loadCurrentWeather } from '../../state/home.actions';
+import { IBookmark } from 'src/app/core/models/Bookmark.model';
+import { clearHomeState, loadCurrentWeather, toggleBookmark } from '../../state/home.actions';
 import {
   selectCurrentWeather,
   selectCurrentWeatherError,
   selectCurrentWeatherLoading
 } from '../../state/home.selectors';
-import { IBookmark } from 'src/app/core/models/Bookmark.model';
+import { selectBookmarksList } from 'src/app/features/bookmarks/state/bookmark.selectors';
 
 @Component({
   selector: 'app-home',
@@ -21,32 +22,51 @@ import { IBookmark } from 'src/app/core/models/Bookmark.model';
   styleUrls: ['./home.view.scss']
 })
 export class HomeView implements OnInit, OnDestroy {
-  searchControl: FormControl;
-  searchLabelControl: FormControl;
-  searchWithAutoCompleteControl: FormControl;
-  cityWeather!: ICityWeather;
-  loading$: Observable<boolean>;
-  error$: Observable<boolean>;
+  searchControl!: FormControl;
+  searchLabelControl!: FormControl;
+  searchWithAutoCompleteControl!: FormControl;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
-  private componentDestroyed = new Subject();
 
-  constructor(private store: Store) {
+  private componentDestroyed = new Subject();
+  cityWeather$!: Observable<ICityWeather>;
+  cityWeather!: ICityWeather;
+  loading$!: Observable<boolean>;
+  error$!: Observable<boolean>;
+  isCurrentFavorite$!: Observable<boolean>;
+  bookmarksList!: IBookmark[];
+  bookmarksList$!: Observable<IBookmark[]>;
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
     this.searchControl = new FormControl('', [Validators.required]);
     this.searchWithAutoCompleteControl = new FormControl('', [Validators.required]);
     this.searchLabelControl = new FormControl('always');
-    this.store.pipe(select(
-      selectCurrentWeather),
-      takeUntil(this.componentDestroyed),
-      ).subscribe(value => this.cityWeather = value);
+
+    this.cityWeather$ = this.store.pipe(select(selectCurrentWeather));
+    this.cityWeather$.pipe(takeUntil(this.componentDestroyed))
+      .subscribe(cityWeather => this.cityWeather = cityWeather);
     this.loading$ = this.store.pipe(select(selectCurrentWeatherLoading));
     this.error$ = this.store.pipe(select(selectCurrentWeatherError));
+    this.bookmarksList$ = this.store.pipe(select(selectBookmarksList));
+    this.isCurrentFavorite$ = combineLatest([this.cityWeather$, this.bookmarksList$])
+      .pipe(
+        map(([current, bookmarksList]) => {
+          if (!!current) {
+            return bookmarksList.some(bookmark => bookmark.id === current.city.id);
+          }
+          return false;
+        }),
+    );
   }
-
-  ngOnInit(): void {}
   ngOnDestroy(): void {
     this.componentDestroyed.next();
     this.componentDestroyed.unsubscribe();
+    this.store.dispatch(clearHomeState());
+  } doAnything() {
+    this.bookmarksList$.pipe(takeUntil(this.componentDestroyed))
+      .subscribe(bookmarksList => this.bookmarksList = bookmarksList);
   }
 
   getErrorMessage() {
@@ -69,6 +89,6 @@ export class HomeView implements OnInit, OnDestroy {
       country,
       coord
     };
+    this.store.dispatch(toggleBookmark({ entity: bookmark }));
   }
-
 }

@@ -6,7 +6,9 @@
   </detailed-weather>
 </mat-card-content>
   <mat-card-actions>
-    <a mat-flat-button [routerLink]="['/']">Add to bookmarks</a>
-    <a mat-flat-button [routerLink]="['/']">View details</a>
+    <button mat-button (click)="onToggleBookmark()">
+      {{ isFavorite ? 'Remove from bookmarks' : 'Add to bookmarks' }}
+    </button>
+    <button mat-button>View details</button>
   </mat-card-actions>
 </mat-card>

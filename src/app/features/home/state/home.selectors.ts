@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { IHomeState } from './home.reducer';
 
-export const homeKey = 'home';
+export const homeKey: string = 'home';
 
 export const selectHomeState = createFeatureSelector<IHomeState>(homeKey);
 

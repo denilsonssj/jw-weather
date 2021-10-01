@@ -8,3 +8,7 @@ export const removeBookmark = createAction(
   '[Bookmark] Remove Bookmark',
   props<IRemoveBookmarkProps>(),
 );
+
+export const resetBookmarkState = createAction(
+  '[Bookmark] Reset Bookmark State',
+);

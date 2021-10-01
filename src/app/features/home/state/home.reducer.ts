@@ -1,6 +1,7 @@
 import { createReducer, Action, on } from "@ngrx/store";
 
 import {
+  clearHomeState,
   loadCurrentWeather,
   loadCurrentWeatherFailed,
   loadCurrentWeatherSuccess 
@@ -20,6 +21,7 @@ export const homeInitialState: IHomeState = {
 
 const reducer = createReducer(
   homeInitialState,
+  on(clearHomeState, () => homeInitialState),
   on(loadCurrentWeather, state => ({
     ...state,
     loading: true,

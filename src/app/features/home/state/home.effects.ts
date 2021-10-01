@@ -18,7 +18,6 @@ export class HomeEffects {
       mergeMap(({ query }) =>
         this.weatherService.getCityWeatherByQuery(query)),
       catchError((error, caught$) => {
-        console.log('error', error);
         this.store.dispatch(loadCurrentWeatherFailed());
         return caught$;
       }),

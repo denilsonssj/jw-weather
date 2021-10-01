@@ -11,6 +11,8 @@ import { CoreModule } from './core/core.module';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
+import { bookmarkReducer } from './features/bookmarks/state/bookmarks.reducer';
+import { homeReducer } from './features/home/state/home.reducer';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { environment } from '../environments/environment';
     CoreModule,
     AppMaterialModule,
     SharedModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      'bookmark': bookmarkReducer,
+      'home': homeReducer
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([])
   ],

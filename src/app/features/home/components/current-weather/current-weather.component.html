@@ -9,6 +9,6 @@
     <button mat-button (click)="onToggleBookmark()">
       {{ isFavorite ? 'Remove from bookmarks' : 'Add to bookmarks' }}
     </button>
-    <button mat-button>View details</button>
+    <a mat-flat-button [routerLink]="['/details']">View details</a>
   </mat-card-actions>
 </mat-card>

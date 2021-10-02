@@ -2,15 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardLayout } from 'src/app/core/layouts/dashboard/dashboard.layout';
-import { DetailsView } from './details/details.view';
+import { DetailsView } from './views/details/details.view';
+import { DetailsGuardService } from './services/details.service';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayout,
     children: [
-      { path: '', component: DetailsView }
-    ]
+      {
+        path: '',
+        component: DetailsView,
+        canActivate: [DetailsGuardService]
+      },
+    ],
   }
 ];
 

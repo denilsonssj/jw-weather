@@ -19,6 +19,8 @@ export const homeInitialState: IHomeState = {
   error: false,
 };
 
+export const homeKeyReducer: string = 'home';
+
 const reducer = createReducer(
   homeInitialState,
   on(clearHomeState, () => homeInitialState),

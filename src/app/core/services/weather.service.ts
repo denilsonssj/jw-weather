@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { ICityWeather } from '../models/CityWeather.model';
-import { responseToCityWheather } from '../utils/response.util';
+import { ICityDailyWeather, ICityWeather } from '../models/CityWeather.model';
+import { responseToCityWheather, responseToCityDailyWeather } from '../utils/response.util';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,27 @@ export class WeatherService {
     return this.doGet('weather', params).pipe(
       map(response => responseToCityWheather(response))
     );
+  }
+
+  getCityWeatherByCoordinate(lat: number, lon: number): Observable<ICityWeather> {
+    const params = new HttpParams({ fromObject: {
+      lat: lat.toString(),
+      lon: lon.toString(),
+    }});
+    return this.doGet<any>('weather', params)
+      .pipe(map(response => responseToCityWheather(response)));
+  }
+
+  getWeatherDetails(lat: number, lon: number): Observable<ICityDailyWeather> {
+    const params = new HttpParams({
+      fromObject: {
+        lat: lat.toString(),
+        lon: lon.toString(),
+        exclude: 'minutely,hourly'
+      }
+    });
+    return this.doGet<any>('onecall', params)
+      .pipe(map(response => responseToCityDailyWeather(response)));
   }
 
   private doGet<T>(url: string, params: HttpParams): Observable<T> {

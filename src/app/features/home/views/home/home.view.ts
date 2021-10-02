@@ -1,20 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject, combineLatest, pipe } from 'rxjs';
-import { combineAll, isEmpty, map, takeUntil } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 import { ICityWeather } from 'src/app/core/models/CityWeather.model';
 import { IBookmark } from 'src/app/core/models/Bookmark.model';
-import { clearHomeState, loadCurrentWeather, toggleBookmark } from '../../state/home.actions';
+import { 
+  clearHomeState,
+  loadCurrentWeather,
+  toggleBookmark 
+} from '../../state/home.actions';
 import {
   selectCurrentWeather,
   selectCurrentWeatherError,
   selectCurrentWeatherLoading
 } from '../../state/home.selectors';
-import { selectBookmarksList } from 'src/app/features/bookmarks/state/bookmark.selectors';
+import { 
+  selectBookmarksList
+} from 'src/app/features/bookmarks/state/bookmark.selectors';
 
 @Component({
   selector: 'app-home',

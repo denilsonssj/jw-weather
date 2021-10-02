@@ -4,11 +4,14 @@ export interface ICityWeather {
 }
 
 export interface ICityDailyWeather {
-  city: ICity
+  city: ICity | ICityWithOnlyTimeZone
   current: IWeather
   daily: IDailyWeather[];
 }
 
+export interface ICityWithOnlyTimeZone {
+  timeZone?: string | undefined;
+}
 export interface ICity {
   id: number;
   name: string;

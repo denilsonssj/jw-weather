@@ -10,6 +10,8 @@ import { HomeEffects } from './state/home.effects';
 import { HomeView } from './views/home/home.view';
 import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
 import { DetailedWeatherComponent } from './components/detailed-weather/detailed-weather.component';
+import { StoreModule } from '@ngrx/store';
+import { homeKeyReducer, homeReducer } from './state/home.reducer';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { DetailedWeatherComponent } from './components/detailed-weather/detailed
     CommonModule,
     ReactiveFormsModule,
     EffectsModule.forFeature([HomeEffects]),
+    StoreModule.forFeature(homeKeyReducer, homeReducer),
 
     AppMaterialModule,
     SharedModule,

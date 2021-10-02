@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { bookmarkReducer } from './features/bookmarks/state/bookmarks.reducer';
 import { homeReducer } from './features/home/state/home.reducer';
+import { reducers } from './shared/state/app.reducer';
+import { CustomRouterSerializer } from './shared/state/router/router.reducer';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,14 @@ import { homeReducer } from './features/home/state/home.reducer';
     CoreModule,
     AppMaterialModule,
     SharedModule,
-    StoreModule.forRoot({
-      'bookmark': bookmarkReducer,
-      'home': homeReducer
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ 
+      maxAge: 25,
+      logOnly:
+      environment.production
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({ serializer: CustomRouterSerializer })
   ],
   providers: [],
   bootstrap: [AppComponent]

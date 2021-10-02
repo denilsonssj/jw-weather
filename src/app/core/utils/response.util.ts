@@ -1,4 +1,4 @@
-import { ICityWeather } from "../models/CityWeather.model";
+import { ICityDailyWeather, ICityWeather, IDailyWeather } from "../models/CityWeather.model";
 
 export function responseToCityWheather(response: any): ICityWeather {
   return {
@@ -26,4 +26,46 @@ export function responseToCityWheather(response: any): ICityWeather {
       sunset: response.sys.sunset
     }
   };
+}
+
+export function responseToCityDailyWeather(response: any): ICityDailyWeather {
+  return {
+    city: {
+      timeZone: response.timezone,
+    },
+    current: {
+      id: response.current.weather[0].id,
+      description: response.current.weather[0].description,
+      icon: response.current.weather[0].icon,
+      temp: response.current.temp,
+      minTemp: undefined,
+      maxTemp: undefined,
+      feelsLike: response.current.feels_like,
+      humidity: response.current.humidity,
+      wind: {
+        speed: response.current.wind_speed,
+        deg: response.current.wind_deg,
+      },
+      sunset: response.current.sunset,
+      sunrise: response.current.sunrise,
+    },
+    daily: response.daily.map((d: any) => ({
+      date: d.dt,
+      weather: {
+        id: d.weather[0].id,
+        description: d.weather[0].description,
+        icon: d.weather[0].icon,
+        temp: undefined,
+        minTemp: d.temp.min,
+        maxTemp: d.temp.max,
+        humidity: d.humidity,
+        wind: {
+          speed: d.wind_speed,
+          deg: d.wind_deg,
+        },
+        sunset: d.sunset,
+        sunrise: d.sunrise,
+      }
+    })),
+  }
 }

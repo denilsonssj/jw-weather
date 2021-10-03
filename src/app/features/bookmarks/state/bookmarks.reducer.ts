@@ -12,6 +12,8 @@ export const bookmarkInitialState: IBookmarksState = {
   bookmarks: [],
 };
 
+export const bookmarkKey: string = 'bookmark';
+
 const reducer = createReducer(
   bookmarkInitialState,
   on(resetBookmarkState, () => bookmarkInitialState),

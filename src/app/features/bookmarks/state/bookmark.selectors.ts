@@ -1,9 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IBookmark } from 'src/app/core/models/Bookmark.model';
 
-import { IBookmarksState } from './bookmarks.reducer';
-
-export const bookmarkKey: string = 'bookmark';
+import { bookmarkKey, IBookmarksState } from './bookmarks.reducer';
 
 export const selectBookmarkState = createFeatureSelector<IBookmarksState>(bookmarkKey);
 

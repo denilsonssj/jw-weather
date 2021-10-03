@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 import { ICityWeather } from 'src/app/core/models/CityWeather.model';
@@ -30,9 +29,6 @@ import {
 export class HomeView implements OnInit, OnDestroy {
   searchControl!: FormControl;
   searchLabelControl!: FormControl;
-  searchWithAutoCompleteControl!: FormControl;
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'indeterminate';
 
   private componentDestroyed = new Subject();
   cityWeather$!: Observable<ICityWeather>;
@@ -40,14 +36,12 @@ export class HomeView implements OnInit, OnDestroy {
   loading$!: Observable<boolean>;
   error$!: Observable<boolean>;
   isCurrentFavorite$!: Observable<boolean>;
-  bookmarksList!: IBookmark[];
   bookmarksList$!: Observable<IBookmark[]>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.searchControl = new FormControl('', [Validators.required]);
-    this.searchWithAutoCompleteControl = new FormControl('', [Validators.required]);
     this.searchLabelControl = new FormControl('always');
 
     this.cityWeather$ = this.store.pipe(select(selectCurrentWeather));
@@ -70,9 +64,6 @@ export class HomeView implements OnInit, OnDestroy {
     this.componentDestroyed.next();
     this.componentDestroyed.unsubscribe();
     this.store.dispatch(clearHomeState());
-  } doAnything() {
-    this.bookmarksList$.pipe(takeUntil(this.componentDestroyed))
-      .subscribe(bookmarksList => this.bookmarksList = bookmarksList);
   }
 
   getErrorMessage() {

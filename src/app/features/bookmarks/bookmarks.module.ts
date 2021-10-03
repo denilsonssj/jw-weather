@@ -6,7 +6,7 @@ import { AppMaterialModule } from 'src/app/shared/app-material/app-material.modu
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BookmarksRoutingModule } from './bookmarks-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { bookmarkReducer } from './state/bookmarks.reducer';
+import { bookmarkKey, bookmarkReducer } from './state/bookmarks.reducer';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { bookmarkReducer } from './state/bookmarks.reducer';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature('bookmark', bookmarkReducer),
+    StoreModule.forFeature(bookmarkKey, bookmarkReducer),
 
     AppMaterialModule,
     SharedModule,

@@ -19,6 +19,6 @@ import { bookmarkKey, bookmarkReducer } from './state/bookmarks.reducer';
     AppMaterialModule,
     SharedModule,
     BookmarksRoutingModule
-  ]
+  ],
 })
 export class BookmarksModule { }

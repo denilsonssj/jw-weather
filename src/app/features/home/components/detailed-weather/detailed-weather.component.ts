@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { IWeather } from 'src/app/core/models/CityWeather.model';
+import { IWeather, IWind } from 'src/app/core/models/CityWeather.model';
 import { environment } from 'src/environments/environment';
 
 @Component({

@@ -9,6 +9,9 @@
     <button mat-button (click)="onToggleBookmark()">
       {{ isFavorite ? 'Remove from bookmarks' : 'Add to bookmarks' }}
     </button>
-    <a mat-flat-button [routerLink]="['/details']">View details</a>
+    <a *ngIf="!!coord" mat-flat-button [routerLink]="['/details']" 
+                       [queryParams]="{ lat: coord.lat, lon: coord.lon }">
+      View details
+    </a>
   </mat-card-actions>
 </mat-card>

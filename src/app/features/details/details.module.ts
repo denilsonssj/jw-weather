@@ -10,10 +10,13 @@ import { DetailsView } from './views/details/details.view';
 import { DetailsGuardService } from './services/details.service';
 import { detailsKeyName, detailsReducer } from './state/details.reducer';
 import { DetailsEffects } from './state/details.effects';
+import { DailyWeatherComponent } from './components/daily-weather/daily-weather.component';
+import { HomeModule } from '../home/home.module';
 
 @NgModule({
   declarations: [
-    DetailsView
+    DetailsView,
+    DailyWeatherComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { DetailsEffects } from './state/details.effects';
 
     AppMaterialModule,
     SharedModule,
-    DetailsRoutingModule
+    DetailsRoutingModule,
+    HomeModule
   ],
   providers: [
     DetailsGuardService

@@ -25,11 +25,12 @@ export class DetailsEffects {
       ),
       catchError((err, caught$) => {
         this.store.dispatch(loadWeatherDetailsFailed());
+        console.log(err);
         return caught$;
       }),
       map(([current, daily]) => {
         const entity = daily;
-        entity.city = {...current.city, timeZone: daily.city.timeZone};
+        entity.city = { ...current.city, timeZone: daily.city.timeZone };
         return loadWeatherDetailsSuccess({ entity });
       }),
     )

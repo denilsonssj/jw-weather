@@ -1,0 +1,20 @@
+<mat-card class="details-mat-card">
+  <mat-card-subtitle>
+    <span class="details-mat-card-subtitle">{{ date }}</span>
+  </mat-card-subtitle>
+  <mat-card-content class="details-mat-content">
+    <div class="item-content">
+      <img [src]="icon" [alt]="dailyWeather.weather.description">
+    </div>
+    <div class="item-content">
+      <span>{{ dailyWeather.weather.minTemp }} K - {{ dailyWeather.weather.maxTemp }} K</span>
+      <span><span class="text-bold">Humidity: </span>{{ dailyWeather.weather.humidity }}%</span>
+      <span><span class="text-bold">Speed wind: </span>{{ dailyWeather.weather.wind?.speed }} m/s</span>
+    </div>
+    <div class="item-content">
+      <span><span class="text-bold">Sunrise: </span>{{ unixTohourMinute(dailyWeather.weather.sunrise) }}</span>
+      <span><span class="text-bold">Sunset: </span>{{ unixTohourMinute(dailyWeather.weather.sunset) }}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions></mat-card-actions>
+</mat-card>

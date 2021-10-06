@@ -1,4 +1,4 @@
-import { ICityDailyWeather, ICityWeather, IDailyWeather } from "../models/CityWeather.model";
+import { ICityDailyWeather, ICityWeather } from "../models/CityWeather.model";
 
 export function responseToCityWheather(response: any): ICityWeather {
   return {
@@ -31,6 +31,10 @@ export function responseToCityWheather(response: any): ICityWeather {
 export function responseToCityDailyWeather(response: any): ICityDailyWeather {
   return {
     city: {
+      id: undefined,
+      name: undefined,
+      country: undefined,
+      coord: undefined,
       timeZone: response.timezone,
     },
     current: {
@@ -42,10 +46,7 @@ export function responseToCityDailyWeather(response: any): ICityDailyWeather {
       maxTemp: undefined,
       feelsLike: response.current.feels_like,
       humidity: response.current.humidity,
-      wind: {
-        speed: response.current.wind_speed,
-        deg: response.current.wind_deg,
-      },
+      wind: undefined,
       sunset: response.current.sunset,
       sunrise: response.current.sunrise,
     },

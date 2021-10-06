@@ -5,7 +5,9 @@
   </div>
   <mat-list class="mat-list">
     <mat-list-item class="mat-list-item" *ngFor="let bookmark of bookmarks">
-      <a class="bookmark-details" mat-flat-button [routerLink]="['/details']">
+      <a class="bookmark-details" mat-flat-button 
+                                  [routerLink]="['/details']"
+                                  [queryParams]="{ lat: bookmark.coord.lat, lon: bookmark.coord.lon }">
         {{ bookmark.name }}
       </a>
       <button class="remove-bookmark-button" mat-flat-button (click)="removeBookmark(bookmark.id)">

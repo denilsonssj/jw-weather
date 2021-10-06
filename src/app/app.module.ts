@@ -12,7 +12,6 @@ import { CoreModule } from './core/core.module';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
-import { bookmarkReducer } from './features/bookmarks/state/bookmarks.reducer';
 import { reducers } from './shared/state/app.reducer';
 import { CustomRouterSerializer } from './shared/state/router/router.reducer';
 
@@ -24,7 +23,6 @@ import { CustomRouterSerializer } from './shared/state/router/router.reducer';
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    StoreModule.forRoot({ 'bookmark': bookmarkReducer }),
     StoreDevtoolsModule.instrument({ 
       maxAge: 25,
       logOnly: environment.production

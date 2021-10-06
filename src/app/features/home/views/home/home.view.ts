@@ -3,9 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
-import { ICityWeather } from 'src/app/core/models/CityWeather.model';
+import { ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
 import { IBookmark } from 'src/app/core/models/Bookmark.model';
 import { 
   clearHomeState,
@@ -79,12 +78,12 @@ export class HomeView implements OnInit, OnDestroy {
   }
 
   onToggleBookmark() {
-    const { id, name, country, coord } = this.cityWeather.city;
+    const { id , name, country, coord } = this.cityWeather.city;
     const bookmark: IBookmark = {
-      id,
-      name,
-      country,
-      coord
+      id: id as number,
+      name: name as string,
+      country: country as string,
+      coord: coord as ICoord,
     };
     this.store.dispatch(toggleBookmark({ entity: bookmark }));
   }

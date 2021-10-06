@@ -1,22 +1,19 @@
 export interface ICityWeather {
   city: ICity
-  weather: IWeather
+  weather: IWeather;
 }
 
 export interface ICityDailyWeather {
-  city: ICity | ICityWithOnlyTimeZone
-  current: IWeather
+  city: ICity;
+  current: IWeather;
   daily: IDailyWeather[];
 }
 
-export interface ICityWithOnlyTimeZone {
-  timeZone?: string | undefined;
-}
 export interface ICity {
-  id: number;
-  name: string;
-  country: string;
-  coord: ICoord;
+  id: number | undefined;
+  name: string | undefined;
+  country: string | undefined;
+  coord: ICoord | undefined;
   timeZone: string | undefined;
 }
 
@@ -25,18 +22,18 @@ export interface IWeather {
   description: string;
   icon: string;
   temp: number;
-  minTemp: number | undefined;
-  maxTemp: number | undefined;
+  minTemp: number | unknown;
+  maxTemp: number | unknown;
   feelsLike: number;
   humidity: number;
-  wind: IWind;
+  wind: IWind | undefined;
   sunrise: number;
   sunset: number;
 }
 
 export interface IDailyWeather {
   date: number;
-  weather: IWeather
+  weather: IWeather;
 }
 
 export interface ICoord {

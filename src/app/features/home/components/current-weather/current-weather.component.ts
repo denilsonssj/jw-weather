@@ -3,10 +3,11 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnInit
 } from '@angular/core';
 
-import { ICityWeather } from 'src/app/core/models/CityWeather.model';
+import { ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
 
 @Component({
   selector: 'current-weather',
@@ -14,15 +15,21 @@ import { ICityWeather } from 'src/app/core/models/CityWeather.model';
   styleUrls: ['./current-weather.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CurrentWeatherComponent {
+export class CurrentWeatherComponent implements OnInit {
   @Input()
   cityWeather!: ICityWeather;
 
   @Input()
   isFavorite!: boolean;
 
+  coord!: ICoord;
+
   @Output('onToggleBookmark')
   toggleBookmark = new EventEmitter();
+
+  ngOnInit() {
+    this.coord = this.cityWeather.city.coord as ICoord;
+  }
 
   get cityName(): string {
     return `${this.cityWeather.city.name}, ${this.cityWeather.city.country}`;

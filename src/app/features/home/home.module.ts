@@ -12,6 +12,7 @@ import { CurrentWeatherComponent } from './components/current-weather/current-we
 import { DetailedWeatherComponent } from './components/detailed-weather/detailed-weather.component';
 import { StoreModule } from '@ngrx/store';
 import { homeKeyReducer, homeReducer } from './state/home.reducer';
+import { BookmarksModule } from '../bookmarks/bookmarks.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { homeKeyReducer, homeReducer } from './state/home.reducer';
 
     AppMaterialModule,
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    BookmarksModule,
+  ],
+  exports: [
+    DetailedWeatherComponent
   ]
 })
 export class HomeModule { }

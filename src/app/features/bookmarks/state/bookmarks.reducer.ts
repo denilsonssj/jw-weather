@@ -27,7 +27,7 @@ const reducer = createReducer(
   })),
 );
 
-export function bookmarkReducer(state: IBookmarksState = bookmarkInitialState, action: Action) {
+export function bookmarkReducer(state: IBookmarksState = bookmarkInitialState, action: Action): IBookmarksState {
   return reducer(state, action);
 }
 

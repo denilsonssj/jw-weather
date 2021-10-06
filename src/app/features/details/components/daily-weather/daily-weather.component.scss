@@ -1,0 +1,31 @@
+.details-mat-card {
+  margin-top: 10px;
+}
+
+.details-mat-card-subtitle {
+  border-radius: 5px;
+  background-color: #353434;
+  color: #fff;
+  padding: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.details-mat-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.details-mat-content .item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-mat-content .item-content + .item-content {
+  margin-left: 30px;
+}
+
+.details-mat-content .item-content .text-bold {
+  font-weight: 500;
+}

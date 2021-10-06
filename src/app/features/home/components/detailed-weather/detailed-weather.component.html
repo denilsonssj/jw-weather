@@ -10,7 +10,11 @@
     <span><span class="prop-description">Feelslike:</span> {{ weather.feelsLike }}K</span>
   </div>
   <div class="weather-details-item weather-misc">
-    <div><span class="prop-description">Humidity:</span> {{ weather.humidity }}%</div>
-    <div><span class="prop-description">Wind speed:</span> {{ weather.wind.speed }} m/s</div>
+    <div>
+      <span class="prop-description">Humidity:</span> {{ weather.humidity }}%
+    </div>
+    <div *ngIf="!!weather.wind">
+      <span class="prop-description">Wind speed:</span> {{ weather.wind.speed }} m/s
+    </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   exports: [
@@ -22,6 +23,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatIconModule,
     MatDividerModule,
+    MatAutocompleteModule,
   ]
 })
 export class AppMaterialModule { }

@@ -1,0 +1,15 @@
+<mat-form-field class="" appearance="outline">
+  <mat-label>Search with autocomplete</mat-label>
+  <input type="text"
+         matInput
+         [formControl]="searchWithAutoComplete"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete"
+                    [displayWith]="displayCityName"
+                    (optionSelected)="onSelected($event.option.value)">
+    <mat-option *ngFor="let city of dataSource" [value]="city">
+      <span *ngIf="!!loading">Loading...</span>
+      {{ city.name }}, {{ city.country }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

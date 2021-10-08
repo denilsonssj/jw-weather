@@ -31,6 +31,13 @@ export class WeatherService {
       .pipe(map(response => responseToCityWheather(response)));
   }
 
+  getCityWeatherById(id: string): Observable<ICityWeather> {
+    const params = new HttpParams({ fromObject: { id } });
+    return this.doGet<any>('weather', params).pipe(
+      map(response => responseToCityWheather(response))
+    );
+  }
+
   getWeatherDetails(lat: number, lon: number): Observable<ICityDailyWeather> {
     const params = new HttpParams({
       fromObject: {

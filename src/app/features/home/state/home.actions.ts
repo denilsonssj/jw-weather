@@ -27,3 +27,8 @@ export const toggleBookmark = createAction(
 export const clearHomeState = createAction(
   '[Home] Clear Home State',
 );
+
+export const loadCurrentWeatherById = createAction(
+  '[Home] Load Current Weather By Id',
+  props<{ id: string }>(),
+);

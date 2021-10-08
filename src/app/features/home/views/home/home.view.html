@@ -13,6 +13,9 @@
               (click)="doSearch()">Search
       </button>
     </fieldset>
+    <fieldset class="search-fieldset">
+      <shared-cities-autocomplete [formControl]="searchControlWithAutoComplete"></shared-cities-autocomplete>
+    </fieldset>
   </section>
   <section class="search-info">
     <ng-container *ngIf="!(loading$ | async) && !(error$ | async) && !!(cityWeather$ | async)">

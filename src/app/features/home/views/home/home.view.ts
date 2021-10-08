@@ -4,11 +4,12 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
-import { ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
+import { ICity, ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
 import { IBookmark } from 'src/app/core/models/Bookmark.model';
 import { 
   clearHomeState,
   loadCurrentWeather,
+  loadCurrentWeatherById,
   toggleBookmark 
 } from '../../state/home.actions';
 import {
@@ -19,6 +20,8 @@ import {
 import { 
   selectBookmarksList
 } from 'src/app/features/bookmarks/state/bookmark.selectors';
+import { ICityTypeaheadItem } from 'src/app/core/models/CityTypeaheadItem.model';
+import { CitiesService } from 'src/app/core/services/cities.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +31,7 @@ import {
 export class HomeView implements OnInit, OnDestroy {
   searchControl!: FormControl;
   searchLabelControl!: FormControl;
+  searchControlWithAutoComplete!: FormControl;
 
   private componentDestroyed = new Subject();
   cityWeather$!: Observable<ICityWeather>;
@@ -37,11 +41,26 @@ export class HomeView implements OnInit, OnDestroy {
   isCurrentFavorite$!: Observable<boolean>;
   bookmarksList$!: Observable<IBookmark[]>;
 
-  constructor(private store: Store) {}
+  selectedCities$: ICity[] = [];
+
+  constructor(private store: Store, private citiesService: CitiesService) {}
 
   ngOnInit(): void {
     this.searchControl = new FormControl('', [Validators.required]);
     this.searchLabelControl = new FormControl('always');
+    this.searchControlWithAutoComplete = new FormControl(undefined);
+
+    this.searchControlWithAutoComplete.valueChanges
+      .pipe(
+        takeUntil(this.componentDestroyed))
+      .subscribe((value: ICityTypeaheadItem) => {
+        console.log(`[Home] value ${value}`);
+        if (!!value) {
+          this.store.dispatch(loadCurrentWeatherById({ 
+            id: value.geonameid.toString() 
+          }));
+        }
+      });
 
     this.cityWeather$ = this.store.pipe(select(selectCurrentWeather));
     this.cityWeather$.pipe(takeUntil(this.componentDestroyed))
@@ -86,5 +105,9 @@ export class HomeView implements OnInit, OnDestroy {
       coord: coord as ICoord,
     };
     this.store.dispatch(toggleBookmark({ entity: bookmark }));
+  }
+
+  displayWith(city: ICity): string {
+    return city.name as string;
   }
 }

@@ -3,6 +3,7 @@ import { createReducer, Action, on } from "@ngrx/store";
 import {
   clearHomeState,
   loadCurrentWeather,
+  loadCurrentWeatherById,
   loadCurrentWeatherFailed,
   loadCurrentWeatherSuccess 
 } from "./home.actions";
@@ -24,7 +25,10 @@ export const homeKeyReducer: string = 'home';
 const reducer = createReducer(
   homeInitialState,
   on(clearHomeState, () => homeInitialState),
-  on(loadCurrentWeather, state => ({
+  on(
+    loadCurrentWeather,
+    loadCurrentWeatherById
+    ,state => ({
     ...state,
     loading: true,
     error: false,

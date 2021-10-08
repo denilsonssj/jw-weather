@@ -5,10 +5,12 @@ import { catchError, map, mergeMap } from "rxjs/operators";
 
 import { 
   loadCurrentWeather,
+  loadCurrentWeatherById,
   loadCurrentWeatherFailed,
   loadCurrentWeatherSuccess 
 } from './home.actions';
 import { WeatherService } from "src/app/core/services/weather.service";
+import { ICityWeather } from "src/app/core/models/CityWeather.model";
 
 @Injectable()
 export class HomeEffects {
@@ -25,6 +27,16 @@ export class HomeEffects {
     )
   );
 
+  loadCurrentWeatherById$ = createEffect(() => this.actions$.pipe(
+    ofType(loadCurrentWeatherById),
+    mergeMap(({ id }: { id: string }) =>
+      this.weatherService.getCityWeatherById(id)),
+    catchError((error, caught$) => {
+      this.store.dispatch(loadCurrentWeatherFailed());
+      return caught$;
+    }),
+    map((entity: ICityWeather) => loadCurrentWeatherSuccess({ entity })),
+  ));
   constructor (
     private actions$: Actions,
     private store: Store,

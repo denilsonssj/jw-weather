@@ -1,19 +1,27 @@
 <div id="bookmarks-view">
-  <h3>Bookmarks</h3>
-  <div *ngIf="!bookmarks.length">
-    No bookmark selected.
+  <h3 class="mat-typography">Bookmarks</h3>
+  <div class="bookmarks-container">
+    <div class="bookmarks-list">
+      <div *ngIf="!!(bookmarks$ | async) && !(bookmarks$ | async)!.length">
+        No bookmark selected.
+      </div>
+      <mat-list class="mat-list" *ngIf="!!(bookmarks$ | async)">
+        <mat-list-item class="mat-list-item" *ngFor="let bookmark of (bookmarks$ | async)">
+          <a class="bookmark-details" 
+             mat-flat-button
+             [routerLink]="['/details']"
+             [queryParams]="{ lat: bookmark.coord.lat, lon: bookmark.coord.lon }">
+            {{ bookmark.name }}
+          </a>
+          <button class="remove-bookmark-button" mat-flat-button (click)="removeBookmark(bookmark.id)">
+            <mat-icon aria-hidden="false" aria-label="Remove bookmark">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <fieldset class="search-fieldset">
+      <shared-cities-autocomplete [formControl]="searchControlWithAutoComplete"></shared-cities-autocomplete>
+    </fieldset>
   </div>
-  <mat-list class="mat-list">
-    <mat-list-item class="mat-list-item" *ngFor="let bookmark of bookmarks">
-      <a class="bookmark-details" mat-flat-button 
-                                  [routerLink]="['/details']"
-                                  [queryParams]="{ lat: bookmark.coord.lat, lon: bookmark.coord.lon }">
-        {{ bookmark.name }}
-      </a>
-      <button class="remove-bookmark-button" mat-flat-button (click)="removeBookmark(bookmark.id)">
-        <mat-icon aria-hidden="false" aria-label="Remove bookmark">delete_outline</mat-icon>
-      </button>
-    </mat-list-item>
-  </mat-list>
-  <a class="link" mat-flat-button [routerLink]="['/']">Add new city in bookmarks.</a>
+  <a class="add-new-city-link" mat-flat-button [routerLink]="['/']">Add new city in bookmarks.</a>
 </div>

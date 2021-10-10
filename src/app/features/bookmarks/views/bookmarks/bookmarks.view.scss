@@ -1,16 +1,49 @@
 #bookmarks-view {
-  .mat-list {
-    .mat-list-item {
-      .bookmark-details {
-        background-color: transparent;
+
+  h3.mat-typography {
+    font-size: 28px;
+    font-weight: 500;
+    color: #373d48;
+  }
+
+  .bookmarks-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .bookmarks-list {
+      width: 400px;
+      .mat-list {
+        .mat-list-item {
+          display: flex;
+          width: 100%;
+          justify-content: space-between !important;
+
+          .bookmark-details {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            background-color: transparent;
+          }
+          .remove-bookmark-button {
+            background-color: transparent;
+          }
+        }
       }
-      .remove-bookmark-button {
-        background-color: transparent;
-      }
+    }
+
+    .search-fieldset {
+      border: none;
     }
   }
 
-  .link {
+  .add-new-city-link {
     background-color: transparent;
+    padding: 0;
   }
+}
+
+:host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+  width: 100%;
+  justify-content: space-between;
 }

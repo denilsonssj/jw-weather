@@ -1,8 +1,14 @@
 import { createReducer, Action, on } from "@ngrx/store";
 
 import { IBookmark } from "src/app/core/models/Bookmark.model";
-import { removeBookmark, resetBookmarkState } from "./bookmarks.actions";
-import { toggleBookmark as toggleBookmarkAction } from "../../home/state/home.actions";
+import { 
+  removeBookmark,
+  resetBookmarkState,
+  updateBookmarksList 
+} from "./bookmarks.actions";
+import { 
+  toggleBookmark as toggleBookmarkAction 
+} from "../../home/state/home.actions";
 
 export interface IBookmarksState {
   bookmarks: IBookmark[];
@@ -24,6 +30,10 @@ const reducer = createReducer(
   on(removeBookmark, (state, { id }) => ({
     ...state,
     bookmarks: state.bookmarks.filter(b => b.id !== id)
+  })),
+  on(updateBookmarksList, (state, { bookmarks }) => ({
+    ...state,
+    bookmarks
   })),
 );
 

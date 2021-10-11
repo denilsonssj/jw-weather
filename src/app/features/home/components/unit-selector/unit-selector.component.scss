@@ -1,0 +1,15 @@
+#unit-container {
+  .unit-label {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  .mat-button-toggle-group {
+    font-weight: 600;
+  }
+}
+
+:host ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  font-size: 14px;
+  line-height: 18px;
+}

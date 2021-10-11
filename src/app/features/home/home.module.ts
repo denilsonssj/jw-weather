@@ -13,12 +13,14 @@ import { DetailedWeatherComponent } from './components/detailed-weather/detailed
 import { StoreModule } from '@ngrx/store';
 import { homeKeyReducer, homeReducer } from './state/home.reducer';
 import { BookmarksModule } from '../bookmarks/bookmarks.module';
+import { UnitSelectorComponent } from './components/unit-selector/unit-selector.component';
 
 @NgModule({
   declarations: [
     HomeView,
     CurrentWeatherComponent,
-    DetailedWeatherComponent
+    DetailedWeatherComponent,
+    UnitSelectorComponent
   ],
   imports: [
     CommonModule,

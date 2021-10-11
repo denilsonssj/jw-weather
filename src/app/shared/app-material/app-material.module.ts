@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   exports: [
@@ -24,6 +25,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
+    MatButtonToggleModule,
   ]
 })
 export class AppMaterialModule { }

@@ -17,7 +17,7 @@ import { CustomRouterSerializer } from './shared/state/router/router.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

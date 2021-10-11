@@ -1,0 +1,8 @@
+<div id="unit-container">
+  <span class="unit-label">Unit:</span>
+  <mat-button-toggle-group name="unitySelector" class="mat-button-toggle-group">
+    <mat-button-toggle [checked]="isActiveToggle(unitEnum.METRIC)" value="unitEnum.METRIC" (click)="updateUnit(unitEnum.METRIC)">ºC</mat-button-toggle>
+    <mat-button-toggle [checked]="isActiveToggle(unitEnum.IMPERIAL)" value="unitEnum.IMPERIAL" (click)="updateUnit(unitEnum.IMPERIAL)">ºF</mat-button-toggle>
+    <mat-button-toggle [checked]="isActiveToggle(unitEnum.SI)" value="unitEnum.SI" (click)="updateUnit(unitEnum.SI)">K</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

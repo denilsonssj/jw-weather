@@ -1,10 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { 
+  ApplicationRef,
+  Component,
+  ComponentFactoryResolver,
+  Injector,
+  OnDestroy,
+  OnInit 
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ComponentPortal, DomPortalOutlet, PortalOutlet } from '@angular/cdk/portal';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
-import { ICity, ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
+import { ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
 import { IBookmark } from 'src/app/core/models/Bookmark.model';
 import { 
   clearHomeState,
@@ -21,7 +29,7 @@ import {
   selectBookmarksList
 } from 'src/app/features/bookmarks/state/bookmark.selectors';
 import { ICityTypeaheadItem } from 'src/app/core/models/CityTypeaheadItem.model';
-import { CitiesService } from 'src/app/core/services/cities.service';
+import { UnitSelectorComponent } from '../../components/unit-selector/unit-selector.component';
 
 @Component({
   selector: 'app-home',
@@ -41,9 +49,14 @@ export class HomeView implements OnInit, OnDestroy {
   isCurrentFavorite$!: Observable<boolean>;
   bookmarksList$!: Observable<IBookmark[]>;
 
-  selectedCities$: ICity[] = [];
+  private portalOutlet!: PortalOutlet;
 
-  constructor(private store: Store, private citiesService: CitiesService) {}
+  constructor(
+    private store: Store,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private appRef: ApplicationRef,
+    private injector: Injector,
+  ) {}
 
   ngOnInit(): void {
     this.searchControl = new FormControl('', [Validators.required]);
@@ -77,11 +90,13 @@ export class HomeView implements OnInit, OnDestroy {
           return false;
         }),
     );
+    this.setupPortal();
   }
   ngOnDestroy(): void {
     this.componentDestroyed.next();
     this.componentDestroyed.unsubscribe();
     this.store.dispatch(clearHomeState());
+    this.portalOutlet.detach();
   }
 
   getErrorMessage() {
@@ -107,7 +122,16 @@ export class HomeView implements OnInit, OnDestroy {
     this.store.dispatch(toggleBookmark({ entity: bookmark }));
   }
 
-  displayWith(city: ICity): string {
-    return city.name as string;
+  private setupPortal() {
+    const el = document.querySelector('#navbar-portal-outlet');
+    if (el instanceof Element) {
+      this.portalOutlet = new DomPortalOutlet(
+        el,
+        this.componentFactoryResolver,
+        this.appRef,
+        this.injector
+      );
+      this.portalOutlet.attach(new ComponentPortal(UnitSelectorComponent));
+    }
   }
 }

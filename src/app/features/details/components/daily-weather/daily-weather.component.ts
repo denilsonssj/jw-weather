@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { format, fromUnixTime } from 'date-fns';
 
 import { IDailyWeather } from 'src/app/core/models/CityWeather.model';
+import { Unit } from 'src/app/core/models/Unit.enum';
+import { unitToSymbol } from 'src/app/core/utils/unit.utils';
 
 import { environment } from 'src/environments/environment';
 
@@ -18,6 +20,9 @@ export class DailyWeatherComponent implements OnInit {
 
   @Input()
   timeZone!: string | undefined;
+
+  @Input()
+  unit!: Unit;
 
   urlMapWeather: string = environment.openWeatherMapUrl;
 
@@ -36,5 +41,9 @@ export class DailyWeatherComponent implements OnInit {
 
   get icon(): string {
     return `${this.urlMapWeather}/img/wn/${this.dailyWeather.weather.icon}@2x.png`;
+  }
+
+  getSymbol(unit: Unit) {
+    return unitToSymbol(unit);
   }
 }

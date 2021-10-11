@@ -18,10 +18,11 @@
     </fieldset>
   </section>
   <section class="search-info">
-    <ng-container *ngIf="!(loading$ | async) && !(error$ | async) && !!(cityWeather$ | async)">
+    <ng-container *ngIf="!(loading$ | async) && !(error$ | async) && !!(cityWeather$ | async) && !!(unit$ | async)">
         <current-weather [cityWeather]="cityWeather"
                         (onToggleBookmark)="onToggleBookmark()"
-                        [isFavorite]="!!(isCurrentFavorite$ | async)">
+                        [isFavorite]="!!(isCurrentFavorite$ | async)"
+                        [unit]="(unit$ | async)!">
         </current-weather>
     </ng-container>
     <div *ngIf="!(loading$ | async) && (error$ | async)">

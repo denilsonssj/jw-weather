@@ -2,7 +2,8 @@
   <mat-card-title class="mat-card-title">{{ cityName }}</mat-card-title>
 <mat-card-content>
   <detailed-weather *ngIf="cityWeather"
-      [weather]="cityWeather.weather">
+      [weather]="cityWeather.weather"
+      [unit]="unit">
   </detailed-weather>
 </mat-card-content>
   <mat-card-actions>

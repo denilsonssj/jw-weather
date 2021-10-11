@@ -7,7 +7,7 @@
       <img [src]="icon" [alt]="dailyWeather.weather.description">
     </div>
     <div class="item-content">
-      <span>{{ dailyWeather.weather.minTemp }} K - {{ dailyWeather.weather.maxTemp }} K</span>
+      <span>{{ dailyWeather.weather.minTemp }} {{ getSymbol(unit) }} - {{ dailyWeather.weather.maxTemp }} {{ getSymbol(unit) }}</span>
       <span><span class="text-bold">Humidity: </span>{{ dailyWeather.weather.humidity }}%</span>
       <span><span class="text-bold">Speed wind: </span>{{ dailyWeather.weather.wind?.speed }} m/s</span>
     </div>

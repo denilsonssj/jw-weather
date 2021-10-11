@@ -9,12 +9,13 @@
   <ng-container *ngIf="!(error$ | async) && !!(details$ | async)">
     <h1>{{ (details$ | async)?.city?.name }}, {{ (details$ | async)?.city?.country }}</h1>
     <mat-card>
-      <detailed-weather [weather]="(details$ | async)!.current"></detailed-weather>
+      <detailed-weather [weather]="(details$ | async)!.current" [unit]="(unit$ | async)!"></detailed-weather>
     </mat-card>
     <details-daily-weather *ngFor="let daily of (details$ | async)!.daily"
                            [dailyWeather]="daily"
                            [timeZone]="(details$ | async )!.city!.timeZone"
-    ></details-daily-weather>
+                           [unit]="(unit$ | async)!">
+    </details-daily-weather>
   </ng-container>
 </div>
 

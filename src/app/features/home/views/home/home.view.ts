@@ -30,6 +30,8 @@ import {
 } from 'src/app/features/bookmarks/state/bookmark.selectors';
 import { ICityTypeaheadItem } from 'src/app/core/models/CityTypeaheadItem.model';
 import { UnitSelectorComponent } from '../../components/unit-selector/unit-selector.component';
+import { Unit } from 'src/app/core/models/Unit.enum';
+import { selectUnitConfig } from 'src/app/shared/state/config/config.selectors';
 
 @Component({
   selector: 'app-home',
@@ -48,7 +50,7 @@ export class HomeView implements OnInit, OnDestroy {
   error$!: Observable<boolean>;
   isCurrentFavorite$!: Observable<boolean>;
   bookmarksList$!: Observable<IBookmark[]>;
-
+  unit$!: Observable<Unit>;
   private portalOutlet!: PortalOutlet;
 
   constructor(
@@ -67,7 +69,6 @@ export class HomeView implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.componentDestroyed))
       .subscribe((value: ICityTypeaheadItem) => {
-        console.log(`[Home] value ${value}`);
         if (!!value) {
           this.store.dispatch(loadCurrentWeatherById({ 
             id: value.geonameid.toString() 
@@ -91,6 +92,7 @@ export class HomeView implements OnInit, OnDestroy {
         }),
     );
     this.setupPortal();
+    this.unit$ = this.store.pipe(select(selectUnitConfig));
   }
   ngOnDestroy(): void {
     this.componentDestroyed.next();

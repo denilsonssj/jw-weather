@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { ICityWeather, ICoord } from 'src/app/core/models/CityWeather.model';
+import { Unit } from 'src/app/core/models/Unit.enum';
 
 @Component({
   selector: 'current-weather',
@@ -22,6 +23,9 @@ export class CurrentWeatherComponent implements OnInit {
   @Input()
   isFavorite!: boolean;
 
+  @Input()
+  unit!: Unit;
+
   coord!: ICoord;
 
   @Output('onToggleBookmark')
@@ -33,6 +37,10 @@ export class CurrentWeatherComponent implements OnInit {
 
   get cityName(): string {
     return `${this.cityWeather.city.name}, ${this.cityWeather.city.country}`;
+  }
+
+  get enumTypes(): typeof Unit {
+    return Unit;
   }
 
   onToggleBookmark() {

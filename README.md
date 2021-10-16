@@ -1,5 +1,4 @@
-# JvWeather
-
+# Jv Weather
 
 ## Getting started
 
